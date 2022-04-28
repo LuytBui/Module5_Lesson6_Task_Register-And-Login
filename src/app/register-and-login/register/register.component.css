@@ -36,19 +36,26 @@
   align-items: center;
 }
 
-.form-row label {
+.form-row .form-label {
   font-weight: 600;
   height: 50%;
   width: 38%;
 }
 
-.form-check-inline {
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.radio-group div {
   height: 50%;
 }
 
 .form-row > * {
   margin: auto;
   height: 36px;
+  /*border: 1px solid black;*/
 }
 
 .form-row input, .form-row select {
@@ -64,4 +71,10 @@ button[type='submit'] {
   padding: 6px 12px;
   margin-left: auto;
   margin-right: 0;
+}
+
+.form-check-inline {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
 }

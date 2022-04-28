@@ -1,48 +1,67 @@
 <div class="container-full-screen">
   <div class="container-form">
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
       <div class="mb-3 d-flex justify-content-center">
         <span class="tittle">Registration</span>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="input-username">
+          <input type="text" class="form-control" id="input-username" formControlName="username">
+        </div>
+        <div class="error-message"
+              [hidden]="usernameControl.valid || usernameControl.pristine"
+        >
+          <p *ngIf="usernameControl.errors?.require">Username is required</p>
+          <p *ngIf="usernameControl.errors?.minlength">Username must longer than 6 characters</p>
+          <p *ngIf="usernameControl.errors?.maxlength">Username must shorter than 20 characters</p>
         </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="input-email">
+          <input type="email" class="form-control" id="input-email" formControlName="email">
+        </div>
+        <div class="error-message"
+             [hidden]="emailControl.valid || emailControl.pristine"
+        >
+          <p *ngIf="emailControl.errors?.require">Email is required</p>
+          <p *ngIf="emailControl.errors?.invalidEmail">Not a valid email</p>
         </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="input-password">
+          <input type="password" class="form-control" id="input-password" formControlName="password">
         </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-confirm-password" class="form-label">Confirm password</label>
-          <input type="password" class="form-control" id="input-confirm-password">
+          <input type="password" class="form-control" id="input-confirm-password" formControlName="confirmPassword">
         </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="select-country" class="form-label">Country</label>
-          <select name="country" id="select-country" class="form-select">
+          <select name="country" id="select-country" class="form-select" formControlName="country">
             <option selected disabled>Select a country</option>
             <option value="Việt Nam">Việt Nam</option>
-            <option value="Việt Nam">Việt Nam</option>
-            <option value="Việt Nam">Việt Nam</option>
+            <option value="Trung Quốc">Trung Quốc</option>
+            <option value="Zimbabue">Zimbabue</option>
           </select>
         </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-age" class="form-label">Age</label>
-          <input type="number" class="form-control" id="input-age">
+          <input type="number" class="form-control" id="input-age" formControlName="age">
+        </div>
+        <div class="error-message"
+             [hidden]="ageControl.valid || ageControl.pristine"
+        >
+          <p *ngIf="ageControl.errors?.require">Age is required</p>
+          <p *ngIf="ageControl.errors?.min">Age must be greater than 18</p>
         </div>
       </div>
       <div class="mb-3">
@@ -50,14 +69,26 @@
           <label class="form-label">Gender</label>
           <div class="form-check form-check-inline">
             <div class="radio-group">
-              <input class="form-check-input" type="radio" name="gender" id="radio-gender-male" value="male">
+              <input class="form-check-input" type="radio" formControlName="gender" id="radio-gender-male" value="male">
               <label class="form-check-label" for="radio-gender-male">Male</label>
             </div>
+            <div class="radio-group">
+              <input class="form-check-input" type="radio" formControlName="gender" id="radio-gender-female" value="female">
+              <label class="form-check-label" for="radio-gender-female">Female</label>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="gender" id="gender-radio-female" value="female">
-            <label class="form-check-label" for="gender-radio-female">Female</label>
-          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-row">
+          <label for="input-phone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="input-phone" formControlName="phone">
+        </div>
+        <div class="error-message"
+             [hidden]="phoneControl.valid || phoneControl.pristine"
+        >
+          <p *ngIf="phoneControl.errors?.require">Phone is required</p>
+          <p *ngIf="phoneControl.errors?.invalidPhone">Not a valid phone number</p>
         </div>
       </div>
       <div class="flex-end">

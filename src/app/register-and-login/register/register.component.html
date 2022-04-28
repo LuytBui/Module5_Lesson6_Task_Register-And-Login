@@ -6,19 +6,6 @@
       </div>
       <div class="mb-3">
         <div class="form-row">
-          <label for="input-username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="input-username" formControlName="username">
-        </div>
-        <div class="error-message"
-              [hidden]="usernameControl.valid || usernameControl.pristine"
-        >
-          <p *ngIf="usernameControl.errors?.require">Username is required</p>
-          <p *ngIf="usernameControl.errors?.minlength">Username must be between 6-20 characters</p>
-          <p *ngIf="usernameControl.errors?.maxlength">Username must be between 6-20 characters</p>
-        </div>
-      </div>
-      <div class="mb-3">
-        <div class="form-row">
           <label for="input-email" class="form-label">Email address</label>
           <input type="email" class="form-control" id="input-email" formControlName="email">
         </div>

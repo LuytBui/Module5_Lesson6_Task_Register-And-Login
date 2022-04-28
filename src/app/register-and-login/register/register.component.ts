@@ -11,8 +11,6 @@ export class RegisterComponent implements OnInit {
 
 
   registerForm = new FormGroup({
-      username: new FormControl('',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
       email: new FormControl('', [this.customValidator.validEmailFn()]),
       password: new FormControl('', [this.customValidator.validatePasswordStrengthFn()]),
       confirmPassword: new FormControl('', []),
@@ -36,12 +34,8 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm);
   }
 
-  checkMatchPassword(){
-    this.passwordMissmatch = (this.passwordControl.value != this.confirmPasswordControl.value);
-  }
-
-  get usernameControl() {
-    return this.registerForm.get('username');
+  checkMatchPassword() {
+    this.passwordMissmatch = (this.passwordControl.value !== this.confirmPasswordControl.value);
   }
 
   get emailControl() {

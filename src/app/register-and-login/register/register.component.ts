@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {IRegister} from '../../IRegister';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomValidatorService} from '../../service/custom-validator.service';
 
 @Component({
@@ -10,17 +9,21 @@ import {CustomValidatorService} from '../../service/custom-validator.service';
 })
 export class RegisterComponent implements OnInit {
 
+
   registerForm = new FormGroup({
-    username: new FormControl('',
-      [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
-    email: new FormControl('', [this.customValidator.validEmailFn()]),
-    password: new FormControl('', []),
-    confirmPassword: new FormControl('', []),
-    country: new FormControl('', []),
-    age: new FormControl('', [Validators.min(18)]),
-    gender: new FormControl('', []),
-    phone: new FormControl('', [this.customValidator.validatePhoneFn()]),
-  });
+      username: new FormControl('',
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+      email: new FormControl('', [this.customValidator.validEmailFn()]),
+      password: new FormControl('', [this.customValidator.validatePasswordStrengthFn()]),
+      confirmPassword: new FormControl('', []),
+      country: new FormControl('', []),
+      age: new FormControl('', [Validators.min(18), Validators.max(130)]),
+      gender: new FormControl('', []),
+      phone: new FormControl('', [this.customValidator.validatePhoneFn()]),
+    }
+  );
+
+  passwordMissmatch = true;
 
   constructor(private customValidator: CustomValidatorService) {
   }
@@ -33,6 +36,9 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm);
   }
 
+  checkMatchPassword(){
+    this.passwordMissmatch = (this.passwordControl.value != this.confirmPasswordControl.value);
+  }
 
   get usernameControl() {
     return this.registerForm.get('username');
@@ -61,6 +67,7 @@ export class RegisterComponent implements OnInit {
   get ageControl() {
     return this.registerForm.get('age');
   }
+
   get phoneControl() {
     return this.registerForm.get('phone');
   }

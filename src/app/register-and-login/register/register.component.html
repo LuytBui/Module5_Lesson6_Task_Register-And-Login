@@ -13,8 +13,8 @@
               [hidden]="usernameControl.valid || usernameControl.pristine"
         >
           <p *ngIf="usernameControl.errors?.require">Username is required</p>
-          <p *ngIf="usernameControl.errors?.minlength">Username must longer than 6 characters</p>
-          <p *ngIf="usernameControl.errors?.maxlength">Username must shorter than 20 characters</p>
+          <p *ngIf="usernameControl.errors?.minlength">Username must be between 6-20 characters</p>
+          <p *ngIf="usernameControl.errors?.maxlength">Username must be between 6-20 characters</p>
         </div>
       </div>
       <div class="mb-3">
@@ -34,11 +34,22 @@
           <label for="input-password" class="form-label">Password</label>
           <input type="password" class="form-control" id="input-password" formControlName="password">
         </div>
+        <div class="error-message"
+             [hidden]="passwordControl.valid || passwordControl.pristine"
+        >
+          <p *ngIf="passwordControl.errors?.require">Password is required</p>
+          <p *ngIf="passwordControl.errors?.passwordStrength">Minimum 6 characters, at least one letter and one number</p>
+        </div>
       </div>
       <div class="mb-3">
         <div class="form-row">
           <label for="input-confirm-password" class="form-label">Confirm password</label>
-          <input type="password" class="form-control" id="input-confirm-password" formControlName="confirmPassword">
+          <input type="password" class="form-control" id="input-confirm-password" formControlName="confirmPassword" (blur)="checkMatchPassword()">
+        </div>
+        <div class="error-message"
+             [hidden]="!passwordMissmatch || confirmPasswordControl.pristine"
+        >
+          <p>Password miss match!</p>
         </div>
       </div>
       <div class="mb-3">
@@ -61,7 +72,8 @@
              [hidden]="ageControl.valid || ageControl.pristine"
         >
           <p *ngIf="ageControl.errors?.require">Age is required</p>
-          <p *ngIf="ageControl.errors?.min">Age must be greater than 18</p>
+          <p *ngIf="ageControl.errors?.min">You must be 18 or older to register</p>
+          <p *ngIf="ageControl.errors?.max">Are you a human???</p>
         </div>
       </div>
       <div class="mb-3">

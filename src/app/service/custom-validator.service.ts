@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AbstractControl, ValidatorFn} from '@angular/forms';
+import {AbstractControl, FormGroup, ValidatorFn} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,9 @@ export class CustomValidatorService {
   phoneRegex = RegExp(
     /^\+84\d{9,10}$/
   );
+  passwordStrength = RegExp(  // Minimum 6 characters, at least one letter and one number
+    /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/
+  );
 
   constructor() {
   }
@@ -21,9 +24,8 @@ export class CustomValidatorService {
         return null;
       }
       const valid = this.emailRegex.test(control.value);
-      return valid ? null : { invalidEmail: true };
+      return valid ? null : {invalidEmail: true};
     };
-
   }
 
   validatePhoneFn() {
@@ -36,14 +38,13 @@ export class CustomValidatorService {
     };
   }
 
-  patternValidator(regExp: RegExp): ValidatorFn {
+  validatePasswordStrengthFn() {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
         return null;
       }
-      const valid = regExp.test(control.value);
-      return valid ? null : {invalidPassword: true};
+      const valid = this.passwordStrength.test(control.value);
+      return valid ? null : {passwordStrength: true};
     };
   }
-
 }

@@ -79,10 +79,6 @@ button[type='submit'] {
   width: 90%;
 }
 
-.error-message {
-
-}
-
 .error-message p {
   width: 100%;
   color: red;

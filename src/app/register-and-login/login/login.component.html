@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="container-full-screen">
+  <div class="container-form">
+    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+      <div class="mb-3 d-flex justify-content-center">
+        <span class="tittle">Login</span>
+      </div>
+      <div class="mb-3">
+        <div class="form-row">
+          <label for="input-email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="input-email" formControlName="email" (focus)="inputEmailOnFocus()">
+        </div>
+        <div class="error-message"
+             [hidden]="!emailNotExist"
+        >
+          <p>This email does not belong to any account</p>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-row">
+          <label for="input-password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="input-password" formControlName="password">
+        </div>
+        <div class="error-message"
+             [hidden]="!wrongPassword || emailNotExist"
+        >
+          <p>Wrong password!</p>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-around">
+        <a>Sign up</a>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+

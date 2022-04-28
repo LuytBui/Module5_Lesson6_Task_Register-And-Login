@@ -9,12 +9,12 @@ import { LoginComponent } from './register-and-login/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterAndLoginComponent,
-    RegisterComponent,
-    LoginComponent
-  ],
+    declarations: [
+        AppComponent,
+        RegisterAndLoginComponent,
+        RegisterComponent,
+        LoginComponent
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
